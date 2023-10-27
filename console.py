@@ -1,8 +1,7 @@
-#!/user/bin/python3
-"""
-this is the console for AirBnB
-"""
+#!/usr/bin/python3
+"""This is the console for AirBnB"""
 import cmd
+from models import storage
 from models import storage
 from datetime import datetime
 from models.base_model import BaseModel
@@ -13,6 +12,7 @@ from models.amenity import Amenity
 from models.place import Place
 from models.review import Review
 from shlex import split
+
 
 class HBNBCommand(cmd.Cmd):
     """this class is entry point of the command interpreter
@@ -64,7 +64,6 @@ class HBNBCommand(cmd.Cmd):
         except Exception as e:
             print("An error occurred: {}".format(e))
 
-
     def do_show(self, line):
         """Prints the string representation of an instance
         Exceptions:
@@ -97,7 +96,6 @@ class HBNBCommand(cmd.Cmd):
             print("** no instance found **")
         except Exception as e:
             print("An error occurred: {}".format(e))
-
 
     def do_destroy(self, line):
         """Deletes an instance based on the class name and id
@@ -133,7 +131,6 @@ class HBNBCommand(cmd.Cmd):
         except Exception as e:
             print("An error occurred: {}".format(e))
 
-
     def do_all(self, line):
         """Prints all string representation of all instances
         Exceptions:
@@ -159,7 +156,6 @@ class HBNBCommand(cmd.Cmd):
             print("** class doesn't exist **")
         except Exception as e:
             print("An error occurred: {}".format(e))
-
 
     def do_update(self, line):
         """Updates an instance by adding or updating attribute
@@ -208,7 +204,6 @@ class HBNBCommand(cmd.Cmd):
         except Exception as e:
             print("An error occurred: {}".format(e))
 
-
     def count(self, line):
         """Count the number of instances of a class
         """
@@ -217,13 +212,14 @@ class HBNBCommand(cmd.Cmd):
             if my_list[0] not in self.all_classes:
                 raise NameError()
             objects = storage.all()
-            counter = sum(1 for key in objects if key.split('.')[0] == my_list[0])
+            counter = sum(
+                1 for key in objects if key.split('.')[0] == my_list[0]
+            )
             print(counter)
         except NameError:
             print("** class doesn't exist **")
         except Exception as e:
             print("An error occurred: {}".format(e))
-
 
     def strip_clean(self, args):
         """Strip the argument and return a string of command
@@ -276,4 +272,3 @@ class HBNBCommand(cmd.Cmd):
 
 if __name__ == '__main__':
     HBNBCommand().cmdloop()
-
